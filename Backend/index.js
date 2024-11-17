@@ -16,10 +16,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const corsOptions = {
-  origin: "*", // Allows all origins
+  origin: ["http://localhost:5173", "https://careerwave.onrender.com"], // List allowed origins
+  credentials: true, // Allow credentials (cookies, authorization headers)
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
+
 app.use(cors(corsOptions));
 
 const port = process.env.PORT || 3000;
