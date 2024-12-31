@@ -28,20 +28,22 @@ export const register = async (req, res) => {
         success: false,
       });
     }
-    await User.create({
+    const newUser = await User.create({
       fullname,
       email,
       phone,
       password: hashedPassword,
       role,
     });
-
-    return res.status(201).json({
-      message: "Account Created Successfully.",
-      success: true,
-    });
+    if (newUser) {
+      await newUser.save();
+      return res.status(201).json({
+        message: "Account Created Successfully.",
+        success: true,
+      });
+    }
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -79,9 +81,8 @@ export const login = async (req, res) => {
       userId: user._id,
     };
 
-    const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(tokenData, process.env.SECRET_KEY);
+
     return res
       .status(200)
       .cookie("token", token, {
@@ -95,7 +96,7 @@ export const login = async (req, res) => {
         success: true,
       });
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -106,7 +107,7 @@ export const logout = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -125,7 +126,7 @@ export const getUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -156,6 +157,6 @@ export const update = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json(error);
   }
 };

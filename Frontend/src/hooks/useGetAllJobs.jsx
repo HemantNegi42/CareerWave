@@ -4,7 +4,7 @@ import { jobUrl } from "@/utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllJobs } from "@/redux/jobSlice";
 
-function useGetAllJobs() {
+async function useGetAllJobs() {
   const dispatch = useDispatch();
 
   const { searchedQuery } = useSelector((store) => store.job);
@@ -19,7 +19,6 @@ function useGetAllJobs() {
         );
 
         if (res.data.success) {
-          console.log(res.data.jobs);
           dispatch(setAllJobs(res.data.jobs));
         }
       } catch (error) {

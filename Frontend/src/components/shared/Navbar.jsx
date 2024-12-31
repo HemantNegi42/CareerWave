@@ -25,7 +25,7 @@ function Navbar() {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.Consolelog(error);
+      console.log(error);
       toast.error(error.response.data.message);
     }
   };

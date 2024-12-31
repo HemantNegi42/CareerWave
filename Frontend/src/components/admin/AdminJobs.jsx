@@ -11,7 +11,9 @@ import { setSearchJobByText } from "@/redux/jobSlice";
 function AdminJobs() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+
   useGetAllAdminJobs();
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setSearchJobByText(search));

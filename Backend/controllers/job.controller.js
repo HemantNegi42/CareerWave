@@ -21,7 +21,7 @@ export const createJob = async (req, res) => {
       companyId,
       experience,
     } = req.body;
-    //console.log("req----->>  ", req.body);
+
     if (
       !title ||
       !description ||

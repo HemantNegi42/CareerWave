@@ -4,7 +4,7 @@ import Post from "./Post";
 import LatestJobs from "./LatestJobs";
 import Footer from "./Footer";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -15,7 +15,7 @@ function Home() {
     if (user?.role == "recruiter") {
       navigate("/admin/companies");
     }
-  }, []);
+  }, [user]);
 
   return (
     <div>

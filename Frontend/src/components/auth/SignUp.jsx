@@ -23,9 +23,6 @@ function SignUp() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  // useEffect(() => {
-  //   submitHandler();
-  // }, []);
   const { loading } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +33,6 @@ function SignUp() {
       dispatch(setLoading(true));
       const res = await axios.post(`${userUrl}/register`, input, {
         headers: { "Content-Type": "application/json" },
-        withCredentials: true,
       });
       if (res.data.success) {
         navigate("/login");
